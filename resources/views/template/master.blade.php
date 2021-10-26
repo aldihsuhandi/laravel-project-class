@@ -7,11 +7,17 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <title>@yield('title')</title>
 </head>
+<style>
+    body
+    {
+        height: 100vh;
+        width: 100%;
+    }
+</style>
 <body>
-
     @include('template.header')
-
-    @yield('body')
-    
+    <main class = "relative bg-bgAlt w-full h-full">
+        @yield('content')
+    </main>
 </body>
 </html>
