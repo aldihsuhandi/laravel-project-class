@@ -1,3 +1,6 @@
+@extends('template.master')
+@section("title", "ReadIT | Login")
+
 @section("content")
     <div class="bg-bg shadow-md p-5 m-5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-3/4 w-1/3">
         <p class = "text-fg text-xl text-center">Create an account</p>
