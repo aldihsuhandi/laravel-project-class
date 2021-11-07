@@ -17,11 +17,10 @@
             <input type="text" class = "bg-bgAlt py-2 px-3 block text-fgAlt shadow appearance-none rounded w-3/4 leading-tight focus:outline-none focus:shadow-outline" id = "email" name = "email">
             <label for="email" class = "pt-3 text-fg block mb-2 text-md">Password</label>
             <input type="password" class = "bg-bgAlt py-2 px-3 block text-fgAlt shadow appearance-none rounded w-3/4 leading-tight focus:outline-none focus:shadow-outline" id = "password" name = "password">
-            <a href="" class = "py-1 text-blue">forgot password</a>
-
+            <a href="#" class = "py-1 text-blue text-xs">Forgot your password?</a>
             <br>
-            <input type="submit" class = "shadow rounded w-3/4 py-2 px-3 leading-tight bg-bgButton cursor-pointer hover:bg-bgHover text-fgBlack transition ease-in-out" value = "login">
-            <p class = "py-1 text-fg">Need an account? <a href="/register" class = "text-blue">Register</a></p>
+            <input type="submit" class = "shadow rounded w-3/4 py-2 px-3 leading-tight bg-bgButton cursor-pointer hover:bg-bgHover text-fgBlack transition ease-in-out" value = "Login">
+            <p class = "py-1 text-fg text-xs">Need an account? <a href="/register" class = "text-blue">Register</a></p>
         </form>
     </div>
 @endsection
