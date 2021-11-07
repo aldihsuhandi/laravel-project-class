@@ -16,6 +16,7 @@ module.exports = {
       bgButton: '#d8dee9',
       bgHover: '#e5e9f0',
       blue: '#5E81AC',
+      inputBg: '#434c5e',
     },
   },
   variants: {
