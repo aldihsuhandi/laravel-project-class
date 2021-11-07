@@ -14,7 +14,7 @@ module.exports = {
       fgAlt: '#eceff4',
       fgBlack: '#3b425',
       bgButton: '#d8dee9',
-      bgHover: 'e5e9f0',
+      bgHover: '#e5e9f0',
       blue: '#5E81AC',
     },
   },
