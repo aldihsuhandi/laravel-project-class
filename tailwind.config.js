@@ -12,11 +12,12 @@ module.exports = {
       bgAlt: '#4c566a',
       fg: '#ffffff',
       fgAlt: '#eceff4',
-      fgBlack: '#3b425',
+      fgBlack: '#3b425a',
       bgButton: '#d8dee9',
       bgHover: '#e5e9f0',
       blue: '#5E81AC',
       inputBg: '#434c5e',
+      green: '#059669',
     },
   },
   variants: {
