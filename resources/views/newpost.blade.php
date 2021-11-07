@@ -7,7 +7,7 @@
     }
 </style>
 
-@section('title', 'New Post')
+@section('title', 'Readit | New Post')
 
 @section('content')
     {{-- TODO: refactor this code --}}
@@ -15,7 +15,7 @@
         <p class = "text-fg text-lg font-bold">Create a post</p>
         <div class = "p-3 bg-bg shadow-md rounded-xl w-full flex flex-col justify-center items-center">
             <form action="" class = "flex flex-col m-0 justify-center items-center w-full">
-                <input name = "title" type="text" placeholder = "Title" list = "categoryList" class = "m-1 bg-fgAlt py-2 px-3 block text-bg shadow appearance-none rounded w-full leading-tight focus:outline-none focus:shadow-outline">
+                <input name = "title" type="text" placeholder = "Title" list = "categoryList" class = "my-2 bg-fgAlt py-2 px-3 block text-bg shadow appearance-none rounded w-full leading-tight focus:outline-none focus:shadow-outline">
                 <input name = "category" type="text" placeholder = "Category" list = "categoryList" class = "m-1 bg-fgAlt py-2 px-3 block text-bg shadow appearance-none rounded w-full leading-tight focus:outline-none focus:shadow-outline">
                 <datalist id = "categoryList">
                 @foreach ($categories as $category)
