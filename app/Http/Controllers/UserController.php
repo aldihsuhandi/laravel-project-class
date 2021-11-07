@@ -15,4 +15,9 @@ class UserController extends Controller
     {
         return view('authenticate.login');
     }
+
+    function profileIndex()
+    {
+        return view('profile');
+    }
 }
