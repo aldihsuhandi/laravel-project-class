@@ -25,7 +25,7 @@
                 <textarea name="description" id="" cols="30" rows="10" placeholder = "Description" class = "resize-none my-2 bg-fgAlt py-2 px-3 block text-bg shadow appearance-none rounded w-full leading-tight focus:outline-none focus:shadow-outline"></textarea>
 
                 <div class = "w-full flex justify-end items-center">
-                    <input type="submit" class = "bg-green px-5 py-1 my-2" value = "Post">
+                    <input type="submit" class = "bg-green w-2/5 rounded text-white px-5 py-1 my-2" value = "Post">
                 </div>
             </form>
         </div>

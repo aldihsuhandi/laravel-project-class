@@ -18,6 +18,7 @@ module.exports = {
       blue: '#5E81AC',
       inputBg: '#434c5e',
       green: '#059669',
+      red: '#BF616A',
     },
   },
   variants: {
