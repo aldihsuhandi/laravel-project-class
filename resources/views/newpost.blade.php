@@ -7,7 +7,7 @@
     }
 </style>
 
-@section('title', 'Readit | New Post')
+@section('title', 'New Post')
 
 @section('content')
     {{-- TODO: refactor this code --}}
