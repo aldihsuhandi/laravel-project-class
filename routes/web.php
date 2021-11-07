@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +20,3 @@ Route::get('/', function () {
 
 Route::get('/register', [UserController::class, 'registerIndex']);
 Route::get('/login', [UserController::class, 'loginIndex']);
-
-// post
-Route::get('/post/new', [PostController::class, 'createPostIndex']);
