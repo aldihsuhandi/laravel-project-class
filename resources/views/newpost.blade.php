@@ -20,7 +20,7 @@
                 <datalist id = "categoryList" class = "w-full">
                 @foreach ($categories as $category)
                     <option value = "{{ $category -> name }}">
-                @endforeach ($categories as $category)
+                @endforeach
                 </datalist>
                 <textarea name="description" id="" cols="30" rows="10" placeholder = "Description" class = "resize-none my-2 bg-fgAlt py-2 px-3 block text-bg shadow appearance-none rounded w-full leading-tight focus:outline-none focus:shadow-outline"></textarea>
 
