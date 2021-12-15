@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +21,11 @@ Route::get('/', function () {
 });
 
 Route::get('/register', [UserController::class, 'registerIndex']);
-Route::get('/login', [UserController::class, 'loginIndex']);
+Route::post('/registering', [UserController::class, 'createUser']);
+
+Route::get('/login', [UserController::class, 'loginIndex'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+
 Route::get('/profile', [UserController::class, 'profileIndex']);
 
 // post
