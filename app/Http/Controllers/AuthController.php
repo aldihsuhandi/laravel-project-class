@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -15,9 +14,7 @@ class AuthController extends Controller
         ]);
 
         if(Auth::attempt($required)) {
-            Auth::user();
-
-            return redirect('/welcome'); // Ntar Diubah
+            return redirect('/test'); // Ntar Diubah
         }
 
         return back() -> withErrors("Your Email or Password is not correct!");

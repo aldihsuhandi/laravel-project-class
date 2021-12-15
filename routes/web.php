@@ -20,10 +20,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test', function() {
+    return view('test');
+});
+
 Route::get('/register', [UserController::class, 'registerIndex']);
 Route::post('/registering', [UserController::class, 'createUser']);
 
-Route::get('/login', [UserController::class, 'loginIndex'])->name('login');
+Route::get('/login', [UserController::class, 'loginIndex']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/profile', [UserController::class, 'profileIndex']);
