@@ -17,7 +17,7 @@ class PostController extends Controller
         return view('newpost')->with('categories', $categories);
     }
 
-    public function insertPost(Request $request){
+    function insertPost(Request $request){
         
         $rules = [
             'title' => 'required',
@@ -38,20 +38,10 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->description = $request->description;
 
-        if(isset($request->category_id)){
-            $post->category_id = $request->category;
-        }
-        if(isset($request->user_id)){
-            $post->user_id = Auth::user()->id;
-        }
-        if(isset($request->title)){
-            $post->title = $request->title;
-        }
-        if(isset($request->description)){
-            $post->description = $request->description;
-        }
-
         $post->save();
-        return redirect('/home');
+        /*
+            redirect ke /post/new sementara karena belum ada page home.blade nya
+        */
+        return redirect('/post/new');
     }
 }
