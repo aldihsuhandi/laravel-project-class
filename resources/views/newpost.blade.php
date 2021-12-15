@@ -16,12 +16,12 @@
         <div class = "p-3 bg-bg shadow-md rounded-xl w-full flex flex-col justify-center items-center">
             <form action="/post/new" method = "post" class = "px-3 flex flex-col m-0 justify-center items-center w-full">
                 <input name = "title" type="text" placeholder = "Title" class = "my-2 bg-fgAlt py-2 px-3 block text-bg shadow appearance-none rounded w-full leading-tight focus:outline-none focus:shadow-outline">
-                <input name = "category" type="text" placeholder = "Category" list = "categoryList" class = "my-2 bg-fgAlt py-2 px-3 block text-bg shadow appearance-none rounded w-full leading-tight focus:outline-none focus:shadow-outline">
-                <datalist id = "categoryList" class = "w-full">
-                @foreach ($categories as $category)
-                    <option value = "{{ $category -> name }}">
-                @endforeach
-                </datalist>
+                {{-- <input name = "category" type="text" placeholder = "Category" list = "categoryList" class = "my-2 bg-fgAlt py-2 px-3 block text-bg shadow appearance-none rounded w-full leading-tight focus:outline-none focus:shadow-outline"> --}}
+                <select name="category" id="category" class = "my-2 bg-fgAlt py-2 px-3 block text-bg shadow appearance-none rounded w-full leading-tight focus:outline-none focus:shadow-outline" placeholder = "category">
+                    @foreach ($categories as $category)
+                        <option value = "{{ $category -> id }}"> {{ $category -> name }} </option>
+                    @endforeach
+                </select>
                 <textarea name="description" id="" cols="30" rows="10" placeholder = "Description" class = "resize-none my-2 bg-fgAlt py-2 px-3 block text-bg shadow appearance-none rounded w-full leading-tight focus:outline-none focus:shadow-outline"></textarea>
 
                 <div class = "w-full flex justify-end items-center">
