@@ -25,3 +25,5 @@ Route::get('/profile', [UserController::class, 'profileIndex']);
 
 // post
 Route::get('/post/new', [PostController::class, 'createPostIndex']);
+
+Route::post('/post/new', [PostController::class], 'insertPost');
