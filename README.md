@@ -13,6 +13,7 @@ npm install
 npm update
 cp .env.example .env
 php artisan key:generate
+php artisan storage:link
 ```
 
 change the database name inside ``.env`` file to your liking
