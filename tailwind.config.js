@@ -19,6 +19,7 @@ module.exports = {
       inputBg: '#434c5e',
       green: '#059669',
       red: '#BF616A',
+      grey: '#d9d9d9',
     },
   },
   variants: {
