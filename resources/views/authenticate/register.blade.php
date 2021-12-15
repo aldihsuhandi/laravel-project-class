@@ -12,7 +12,8 @@
     {{-- TODO: refactor this code --}}
     <div class="bg-bg rounded-xl shadow-md p-5 m-5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-2/3 w-1/3">
         <p class = "text-fg text-xl text-center">Create an account</p>
-        <form action="/register" method = "POST" class="flex flex-col pt-5 mt-2">
+        <form action="/registering" enctype="multipart/form-data" method = "POST" class="flex flex-col pt-5 mt-2">
+            @csrf
             <label for="email" class="text-fg flex flex-col pt-2 mt-2">Email</label>
             <input type="text" class="bg-bgAlt py-2 px-3 block text-fgAlt appearance-none rounded w-11/12 leading-tight focus:outline-none focus:shadow-outline" id="emailRegister" name="emailRegister">
             <label for="username" class="text-fg flex flex-col pt-2 mt-2">Username</label>

@@ -9,7 +9,7 @@
 </style>
 
 @section('content')
-    <div class = "grid grid-cols-5 gap-4 w-2/5 transform translate-x-3/4 translate-y-36">
+    <div class = "grid grid-cols-5 gap-14 w-2/5 transform translate-x-3/4 translate-y-36">
         <div class = "bg-bg shadow-md rounded-xl p-5 py-10 col-span-2">
             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" width = "300" height = "300" class="">
             <input type="button" class = "shadow-md w-full py-2 px-3 mt-10 leading-tight bg-bgButton cursor-pointer hover:bg-bgHover text-fgBlack transition ease-in-out" value = "Choose Photo">
