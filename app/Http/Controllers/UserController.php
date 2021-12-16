@@ -9,10 +9,18 @@ class UserController extends Controller
 {
     function createUser(Request $request)
     {
+        $rules = [
+            'email' => "required|email|unique:users,email",
+            'username' => "required|min:5",
+            'password' => "required|min:6|alphanumeric",
+        ];
+
+        $request->validate($rules);
+
         $user = new User();
-        $user->email = $request->emailRegister;
-        $user->username = $request->usernameRegister;
-        $user->password = bcrypt($request->passwordRegister);
+        $user->email = $request->email;
+        $user->username = $request->username;
+        $user->password = bcrypt($request->password);
         $user->description = "";
         $user->profile_img = "";
         $user->save();

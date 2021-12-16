@@ -15,11 +15,20 @@
         <form action="/registering" enctype="multipart/form-data" method = "POST" class="flex flex-col pt-5 mt-2">
             @csrf
             <label for="email" class="text-fg flex flex-col pt-2 mt-2">Email</label>
-            <input type="text" class="bg-bgAlt py-2 px-3 block text-fgAlt appearance-none rounded w-11/12 leading-tight focus:outline-none focus:shadow-outline" id="emailRegister" name="emailRegister">
+            <input type="text" class="bg-bgAlt py-2 px-3 block text-fgAlt appearance-none rounded w-11/12 leading-tight focus:outline-none focus:shadow-outline" id="email" name="email">
+            @error('email')
+                <div class = "p-1 text-red text-sm">* {{ $message }}</div>
+            @enderror
             <label for="username" class="text-fg flex flex-col pt-2 mt-2">Username</label>
-            <input type="text" class="bg-bgAlt py-2 px-3 block text-fgAlt appearance-none rounded w-11/12 leading-tight focus:outline-none focus:shadow-outline" id="usernameRegister" name="usernameRegister">
+            <input type="text" class="bg-bgAlt py-2 px-3 block text-fgAlt appearance-none rounded w-11/12 leading-tight focus:outline-none focus:shadow-outline" id="username" name="username">
+            @error('username')
+                <div class = "p-1 text-red text-sm">* {{ $message }}</div>
+            @enderror
             <label for="password" class="text-fg flex flex-col pt-2 mt-2">Password</label>
-            <input type="password" class="bg-bgAlt py-2 px-3 block text-fgAlt appearance-none rounded w-11/12 leading-tight focus:outline-none focus:shadow-outline" id="passwordRegister" name="passwordRegister">
+            <input type="password" class="bg-bgAlt py-2 px-3 block text-fgAlt appearance-none rounded w-11/12 leading-tight focus:outline-none focus:shadow-outline" id="passwor" name="password">
+            @error('username')
+                <div class = "p-1 text-red text-sm">* {{ $message }}</div>
+            @enderror
             <br>
             <br>
             <input type="submit" class="shadow rounded w-11/12 py-2 px-3 leading-tight bg-bgButton cursor-pointer hover:bg-fg text-fgBlack transition ease-in-out" value="Register">
