@@ -8,19 +8,8 @@
         <p class = "text-fg text-xl font-bold">Trending</p>
         <p class = "text-fg">Show all Trending</p>
     </div>
-    <div class = "w-full flex flex-row justify-evenly items-center py-2 my-2">
-        @foreach ($trending as $post)
-            <div class = "p-3 relative h-40 w-1/5 bg-bg rounded shadow-md relative">
-                <div class = "p-1 flex flex-col">
-                    <div class = "text-fg font-bold font-xl">{{ $post -> title }}</div>
-                    <div class = "text-fg font-base font-base">{{ $post -> category -> name }}</div>
-                </div>
-                <div class = "absolute bottom-0 right-0 mr-3 mb-3 flex flex-row">
-                    <div class = "px-1 text-fg"> <i class = "fas fa-thumbs-up"></i></div>
-                    <div class = "px-1 text-fg"> <i class = "fas fa-thumbs-down"></i></div>
-                </div>
-            </div>
-        @endforeach
+    <div class = "w-full flex flex-row justify-evenly items-center py-2 my-2" id = "trending_container">
+        @include('post.cardtemplate')
     </div>
     <div class = "flex flex-row justify-between items-start w-full">
         {{-- post  --}}
@@ -83,6 +72,19 @@
         }
     });
 
+    function update_trending()
+    {
+        var url = "/post/trending";
+        $.ajax({
+            url: url,
+            type: 'get',
+        }).done(function(data) {
+            console.log(data);
+            $("#trending_container").empty();
+            $("#trending_container").append(data);
+        });
+    }
+
     function update_like(post_id, state, like_count, dislike_count)
     {
         var like_button = "#like_button_" + post_id;
@@ -136,6 +138,7 @@
                     response["like_count"],
                     response["dislike_count"]
                 );
+                update_trending();
             },
             error: function(error) {
                 console.log(error);

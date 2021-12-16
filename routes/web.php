@@ -41,3 +41,4 @@ Route::post('/post/new', 'App\Http\Controllers\PostController@insertPost');
 
 // like and dislike post
 Route::post('/post/like', [PostController::class, 'like_handler']);
+Route::get('/post/trending', [HomeController::class, 'get_trending']);
