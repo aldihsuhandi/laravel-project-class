@@ -12,10 +12,20 @@
             {{ $post -> description }}
         </div>
         <div class = "w-full flex flex-row justify-start items-center pt-3">
-            <div><i class = "text-fg pr-4 mx-1 fas fa-thumbs-up"></i></div>
-            <div><i class = "text-fg pr-4 mx-1 fas fa-thumbs-down"></i></div>
-            <div><i class = "text-fg pr-4 mx-1 fas fa-comment"></i></div>
-            <div><i class = "text-fg pr-4 mx-1 fas fa-share"></i></div>
+            <div onclick="likepost({{$post -> id}})" class = "cursor-pointer text-fg flex flex-row items-center justify-center pr-4 mx-1">
+                <p class = "mt-2" id = "like_post_{{$post -> id}}">{{ $post -> like -> where('value', '1') -> count() }} </p>
+                <i class = "p-1 fas fa-thumbs-up"></i>
+            </div>
+            <div onclick="dislikepost({{$post -> id}})" class = "cursor-pointer text-fg flex flex-row items-center justify-center pr-4 mx-1">
+                <p class = "mt-2" id = "dislike_post_{{$post -> id}}">{{ $post -> like -> where('value', '-1') -> count() }} </p>
+                <i class = "p-1 mt-2 fas fa-thumbs-down"></i>
+            </div>
+            <a class = "text-fg flex flex-row items-center justify-center pr-4 mx-1">
+                <i class = "p-1 fas fa-comment"></i>
+            </a>
+            <a class = "text-fg flex flex-row items-center justify-center pr-4 mx-1">
+                <i class = "p-1 fas fa-share"></i>
+            </a>
         </div>
     </div>
 @endforeach
