@@ -40,5 +40,4 @@ Route::get('/post/new', [PostController::class, 'createPostIndex']);
 Route::post('/post/new', 'App\Http\Controllers\PostController@insertPost');
 
 // like and dislike post
-Route::get('/post/{post_id}/like', [PostController::class, 'like']);
-Route::get('/post/{post_id}/dislike', [PostController::class, 'dislike']);
+Route::post('/post/like', [PostController::class, 'like_handler']);

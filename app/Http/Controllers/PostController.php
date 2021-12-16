@@ -51,59 +51,33 @@ class PostController extends Controller
      * Access this method using ajax
      * Don't access it with route
      */
-    public function like($post_id)
+    public function like_handler(Request $request)
     {
-        $post = Post::find($post_id);
+        if ($request->ajax() == false) {
+            return abort(404);
+        }
+
+        $post = Post::find($request->post_id);
+        $value = $request->value;
+        $state = $value == 1 ? "like" : "dislike";
+
         $user = Auth::user();
         $like = LikePost::where('user_id', $user->id)->where('post_id', $post->id)->first();
-        $state = "like";
+
         if ($like == null) {
             $like = new LikePost();
-            $like->value = 1;
+            $like->value = $value;
             $like->user_id = $user->id;
             $like->post_id = $post->id;
             $like->save();
         } else {
-            $value = $like->value == 1 ? 0 : 1;
-            if ($value == 0) {
+            $p_value = $like->value == $value ? 0 : $value;
+            if ($p_value == 0) {
                 $state = "null";
             }
-            LikePost::where('user_id', $user->id)->where('post_id', $post->id)->update(['value' => $value]);
+            LikePost::where('user_id', $user->id)->where('post_id', $post->id)->update(['value' => $p_value]);
         }
 
-        $likecount = LikePost::where('post_id', $post->id)->where('value', 1)->count();
-        $dislikecount = LikePost::where('post_id', $post->id)->where('value', -1)->count();
-        $count = [
-            "like_count" => $likecount,
-            "dislike_count" => $dislikecount,
-            "state" => $state,
-        ];
-        return response()->json($count);
-    }
-
-    /**
-     * Access this method using ajax
-     * Don't access it with route
-     */
-    public function dislike($post_id)
-    {
-        $post = Post::find($post_id);
-        $user = Auth::user();
-        $like = LikePost::where('user_id', $user->id)->where('post_id', $post->id)->first();
-        $state = "dislike";
-        if ($like == null) {
-            $like = new LikePost();
-            $like->value = -1;
-            $like->user_id = $user->id;
-            $like->post_id = $post->id;
-            $like->save();
-        } else {
-            $value = $like->value == -1 ? 0 : -1;
-            if ($value == 0) {
-                $state = "null";
-            }
-            LikePost::where('user_id', $user->id)->where('post_id', $post->id)->update(['value' => $value]);
-        }
 
         $likecount = LikePost::where('post_id', $post->id)->where('value', 1)->count();
         $dislikecount = LikePost::where('post_id', $post->id)->where('value', -1)->count();

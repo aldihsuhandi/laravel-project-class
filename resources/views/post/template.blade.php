@@ -12,8 +12,9 @@
             {{ $post -> description }}
         </div>
         <div class = "w-full flex flex-row justify-start items-center pt-3">
-            <div onclick="likepost({{$post -> id}})" class = "
+            <div onclick="like_handler({{$post -> id}}, 1)" class = "
                 @if (
+                    Auth::check() &&
                     $post -> like -> where('user_id', Auth::user() -> id) -> first() != NULL &&
                     $post -> like -> where('user_id', Auth::user() -> id) -> first() -> value == 1
                 )
@@ -25,8 +26,9 @@
                 <p class = "mt-2" id = "like_post_{{$post -> id}}">{{ $post -> like -> where('value', '1') -> count() }} </p>
                 <i class = "p-1 fas fa-thumbs-up"></i>
             </div>
-            <div onclick="dislikepost({{$post -> id}})" class = "
+            <div onclick="like_handler({{$post -> id}}, -1)" class = "
                 @if (
+                    Auth::check() &&
                     $post -> like -> where('user_id', Auth::user() -> id) -> first() != NULL &&
                     $post -> like -> where('user_id', Auth::user() -> id) -> first() -> value == -1
                 )
