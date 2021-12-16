@@ -7,11 +7,12 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    function createUser(Request $request) {
+    function createUser(Request $request)
+    {
         $user = new User();
         $user->email = $request->emailRegister;
         $user->username = $request->usernameRegister;
-        $user->password = $request->passwordRegister;
+        $user->password = bcrypt($request->passwordRegister);
         $user->description = "";
         $user->profile_img = "";
         $user->save();
