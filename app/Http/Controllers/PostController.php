@@ -56,16 +56,18 @@ class PostController extends Controller
         $post = Post::find($post_id);
         $user = Auth::user();
         $like = LikePost::where('user_id', $user->id)->where('post_id', $post->id)->first();
+        $state = "like";
         if ($like == null) {
             $like = new LikePost();
             $like->value = 1;
             $like->user_id = $user->id;
             $like->post_id = $post->id;
             $like->save();
-            // dd("like is null");
         } else {
-            // dd("like is not  null");
             $value = $like->value == 1 ? 0 : 1;
+            if ($value == 0) {
+                $state = "null";
+            }
             LikePost::where('user_id', $user->id)->where('post_id', $post->id)->update(['value' => $value]);
         }
 
@@ -73,7 +75,8 @@ class PostController extends Controller
         $dislikecount = LikePost::where('post_id', $post->id)->where('value', -1)->count();
         $count = [
             "like_count" => $likecount,
-            "dislike_count" => $dislikecount
+            "dislike_count" => $dislikecount,
+            "state" => $state,
         ];
         return response()->json($count);
     }
@@ -87,16 +90,18 @@ class PostController extends Controller
         $post = Post::find($post_id);
         $user = Auth::user();
         $like = LikePost::where('user_id', $user->id)->where('post_id', $post->id)->first();
+        $state = "dislike";
         if ($like == null) {
             $like = new LikePost();
-            $like->value = 1;
+            $like->value = -1;
             $like->user_id = $user->id;
             $like->post_id = $post->id;
             $like->save();
-            // dd("like is null");
         } else {
-            // dd("like is not  null");
             $value = $like->value == -1 ? 0 : -1;
+            if ($value == 0) {
+                $state = "null";
+            }
             LikePost::where('user_id', $user->id)->where('post_id', $post->id)->update(['value' => $value]);
         }
 
@@ -104,7 +109,8 @@ class PostController extends Controller
         $dislikecount = LikePost::where('post_id', $post->id)->where('value', -1)->count();
         $count = [
             "like_count" => $likecount,
-            "dislike_count" => $dislikecount
+            "dislike_count" => $dislikecount,
+            "state" => $state,
         ];
         return response()->json($count);
     }

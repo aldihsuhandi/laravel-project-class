@@ -83,23 +83,42 @@
         }
     });
 
+    function check_like(post_id, state)
+    {
+        var like_button = "#like_button_" + post_id;
+        var dislike_button = "#dislike_button_" + post_id;
+        console.log(state);
+        if(state == "like")
+        {
+            $(like_button).css("color", "#5E81AC");
+            $(dislike_button).css("color", "#ffffff");
+        }
+        else if(state == "dislike")
+        {
+            $(like_button).css("color", "#ffffff");
+            $(dislike_button).css("color", "#5E81AC");
+        }
+        else 
+        {
+            $(like_button).css("color", "#ffffff");
+            $(dislike_button).css("color", "#ffffff");
+        }
+    }
+
     function likepost(post_id)
     {
         var like_button = "#like_post_" + post_id;
         var dislike_button = "#dislike_post_" + post_id;
         var url = "/post/" + post_id + "/like";
-        // console.log(post_id);
-        // console.log(like_button);
 
         $.ajax({
             url: url,
             type: 'get',
             dataType: 'json',
         }).done(function(data){
-            // console.log(data["like_count"]);
-            // console.log(data["dislike_count"]);
             $(like_button).text(data["like_count"]);
             $(dislike_button).text(data["dislike_count"]);
+            check_like(post_id, data["state"]);
         })
     }
 
@@ -108,18 +127,15 @@
         var like_button = "#like_post_" + post_id;
         var dislike_button = "#dislike_post_" + post_id;
         var url = "/post/" + post_id + "/dislike";
-        // console.log(post_id);
-        // console.log(like_button);
 
         $.ajax({
             url: url,
             type: 'get',
             dataType: 'json',
         }).done(function(data){
-            // console.log(data["like_count"]);
-            // console.log(data["dislike_count"]);
             $(like_button).text(data["like_count"]);
             $(dislike_button).text(data["dislike_count"]);
+            check_like(post_id, data["state"]);
         })
     }
 </script>
