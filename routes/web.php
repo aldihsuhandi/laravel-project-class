@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/test', function() {
+Route::get('/test', function () {
     return view('test');
 });
 
@@ -29,6 +29,8 @@ Route::post('/registering', [UserController::class, 'createUser']);
 Route::get('/login', [UserController::class, 'loginIndex']);
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::get('/logout', [AuthController::class, 'logout']);
+
 Route::get('/profile', [UserController::class, 'profileIndex']);
 
 // post
@@ -36,3 +38,7 @@ Route::get('/post/new', [PostController::class, 'createPostIndex']);
 
 
 Route::post('/post/new', 'App\Http\Controllers\PostController@insertPost');
+
+// like and dislike post
+Route::get('/post/{post_id}/like', [PostController::class, 'like']);
+Route::get('/post/{post_id}/dislike', [PostController::class, 'dislike']);

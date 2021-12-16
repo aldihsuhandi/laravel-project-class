@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\LikePost;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,8 +18,9 @@ class PostController extends Controller
         return view('newpost')->with('categories', $categories);
     }
 
-    function insertPost(Request $request){
-        
+    function insertPost(Request $request)
+    {
+
         $rules = [
             'title' => 'required',
             'category' => 'required',
@@ -27,12 +29,12 @@ class PostController extends Controller
 
         $validator = Validator::make($request->all(), $rules);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return back()->withErrors($validator, 'insert');
         }
 
         $post = new Post();
-        
+
         $post->category_id = $request->category;
         $post->user_id = Auth::user()->id;
         $post->title = $request->title;
@@ -43,5 +45,67 @@ class PostController extends Controller
             redirect ke /post/new sementara karena belum ada page home.blade nya
         */
         return redirect('/post/new');
+    }
+
+    /**
+     * Access this method using ajax
+     * Don't access it with route
+     */
+    public function like($post_id)
+    {
+        $post = Post::find($post_id);
+        $user = Auth::user();
+        $like = LikePost::where('user_id', $user->id)->where('post_id', $post->id)->first();
+        if ($like == null) {
+            $like = new LikePost();
+            $like->value = 1;
+            $like->user_id = $user->id;
+            $like->post_id = $post->id;
+            $like->save();
+            // dd("like is null");
+        } else {
+            // dd("like is not  null");
+            $value = $like->value == 1 ? 0 : 1;
+            LikePost::where('user_id', $user->id)->where('post_id', $post->id)->update(['value' => $value]);
+        }
+
+        $likecount = LikePost::where('post_id', $post->id)->where('value', 1)->count();
+        $dislikecount = LikePost::where('post_id', $post->id)->where('value', -1)->count();
+        $count = [
+            "like_count" => $likecount,
+            "dislike_count" => $dislikecount
+        ];
+        return response()->json($count);
+    }
+
+    /**
+     * Access this method using ajax
+     * Don't access it with route
+     */
+    public function dislike($post_id)
+    {
+        $post = Post::find($post_id);
+        $user = Auth::user();
+        $like = LikePost::where('user_id', $user->id)->where('post_id', $post->id)->first();
+        if ($like == null) {
+            $like = new LikePost();
+            $like->value = 1;
+            $like->user_id = $user->id;
+            $like->post_id = $post->id;
+            $like->save();
+            // dd("like is null");
+        } else {
+            // dd("like is not  null");
+            $value = $like->value == -1 ? 0 : -1;
+            LikePost::where('user_id', $user->id)->where('post_id', $post->id)->update(['value' => $value]);
+        }
+
+        $likecount = LikePost::where('post_id', $post->id)->where('value', 1)->count();
+        $dislikecount = LikePost::where('post_id', $post->id)->where('value', -1)->count();
+        $count = [
+            "like_count" => $likecount,
+            "dislike_count" => $dislikecount
+        ];
+        return response()->json($count);
     }
 }
