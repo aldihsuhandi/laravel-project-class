@@ -9,7 +9,11 @@
     </div>
 
     <div class = "w-1/4 flex flex-row justify-start items-center">
-        <a href = "/login" class = "mx-3 p-2 rounded-md bg-bgAlt text-fg">Login</a>
-        <a href = "/register" class = "mx-3 p-2 rounded-md bg-bgAlt text-fg">Sign Up</a>
+        @if (Auth::check())
+            <a href = "/logout" class = "mx-3 p-2 rounded-md bg-bgAlt text-fg">Logout</a>
+        @else
+            <a href = "/login" class = "mx-3 p-2 rounded-md bg-bgAlt text-fg">Login</a>
+            <a href = "/register" class = "mx-3 p-2 rounded-md bg-bgAlt text-fg">Sign Up</a>
+        @endif
     </div>
 </nav>

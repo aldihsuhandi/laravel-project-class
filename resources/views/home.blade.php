@@ -58,7 +58,7 @@
     var load = true;
     function loadMore(page)
     {
-        console.log("test");
+        // console.log("test");
         $.ajax({
             url: '?page=' + page,
             type: 'get',
@@ -82,5 +82,45 @@
             loadMore(page);
         }
     });
+
+    function likepost(post_id)
+    {
+        var like_button = "#like_post_" + post_id;
+        var dislike_button = "#dislike_post_" + post_id;
+        var url = "/post/" + post_id + "/like";
+        // console.log(post_id);
+        // console.log(like_button);
+
+        $.ajax({
+            url: url,
+            type: 'get',
+            dataType: 'json',
+        }).done(function(data){
+            // console.log(data["like_count"]);
+            // console.log(data["dislike_count"]);
+            $(like_button).text(data["like_count"]);
+            $(dislike_button).text(data["dislike_count"]);
+        })
+    }
+
+    function dislikepost(post_id)
+    {
+        var like_button = "#like_post_" + post_id;
+        var dislike_button = "#dislike_post_" + post_id;
+        var url = "/post/" + post_id + "/dislike";
+        // console.log(post_id);
+        // console.log(like_button);
+
+        $.ajax({
+            url: url,
+            type: 'get',
+            dataType: 'json',
+        }).done(function(data){
+            // console.log(data["like_count"]);
+            // console.log(data["dislike_count"]);
+            $(like_button).text(data["like_count"]);
+            $(dislike_button).text(data["dislike_count"]);
+        })
+    }
 </script>
 @endsection
