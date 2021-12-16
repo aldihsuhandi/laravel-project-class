@@ -46,7 +46,7 @@
                 @endforeach
             </div>
             <div class = "p-2 text-fg">
-                {{ $categories -> links() }}
+                {{-- {{ $categories -> links() }} --}}
             </div>
         </div>
     </div>
