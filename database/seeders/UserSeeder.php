@@ -21,5 +21,13 @@ class UserSeeder extends Seeder
             'description' => 'this is user description',
             'profile_img' => "",
         ]);
+
+        DB::table('users')->insert([
+            'username' => "user2",
+            'email' => 'user@user2.com',
+            'password' => bcrypt('password'),
+            'description' => 'this is user description',
+            'profile_img' => "",
+        ]);
     }
 }
