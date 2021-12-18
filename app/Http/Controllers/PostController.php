@@ -11,13 +11,20 @@ use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
-    function createPostIndex()
+
+    public function index($post_id)
+    {
+        $post = Post::find($post_id);
+        return view('post.post', ["post" => $post]);
+    }
+
+    public function createPostIndex()
     {
         $categories = Category::all();
         return view('newpost')->with('categories', $categories);
     }
 
-    function insertPost(Request $request)
+    public function insertPost(Request $request)
     {
 
         $rules = [

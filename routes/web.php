@@ -34,11 +34,13 @@ Route::get('/logout', [AuthController::class, 'logout']);
 Route::get('/profile', [UserController::class, 'profileIndex']);
 
 // post
-Route::get('/post/new', [PostController::class, 'createPostIndex']);
+Route::prefix('post')->group(function () {
+    Route::get('/view/{post_id}', [PostController::class, 'index']);
 
+    Route::get('/new', [PostController::class, 'createPostIndex']);
+    Route::post('/new', [PostController::class, 'insertPost']);
 
-Route::post('/post/new', 'App\Http\Controllers\PostController@insertPost');
-
-// like and dislike post
-Route::post('/post/like', [PostController::class, 'like_handler']);
-Route::get('/post/trending', [HomeController::class, 'get_trending']);
+    // ajax function
+    Route::post('/like', [PostController::class, 'like_handler']);
+    Route::get('/trending', [HomeController::class, 'get_trending']);
+});

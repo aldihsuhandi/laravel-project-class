@@ -1,9 +1,9 @@
 @foreach ($posts as $post)
     <div class = "relative p-3 rounded shadow-md bg-bg w-full my-2">
-        <div class = "w-full flex flex-row justify-between items-end">
+        <a class = "w-full flex flex-row justify-between items-end" href = "/post/view/{{ $post -> id }}">
             <div class = "font-semibold text-xl text-fg">{{ $post -> title }}</div>
             <div class = "font-base text-md text-fg">{{ $post -> category -> name }}</div>
-        </div>
+        </a>
         <div class = "flex flex-row justify-start items-center w-full">
             <i class = "fas fa-user text-fg pr-1"></i>
             <div class = "text-fg text-md pl-1">{{ $post -> user -> username }}</div>
@@ -12,40 +12,7 @@
             {{ $post -> description }}
         </div>
         <div class = "w-full flex flex-row justify-start items-center pt-3">
-            <div onclick="like_handler({{$post -> id}}, 1)" class = "
-                @if (
-                    Auth::check() &&
-                    $post -> like -> where('user_id', Auth::user() -> id) -> first() != NULL &&
-                    $post -> like -> where('user_id', Auth::user() -> id) -> first() -> value == 1
-                )
-                    text-blue
-                @else
-                    text-fg 
-                @endif
-                cursor-pointer flex flex-row items-center justify-center pr-4 mx-1" id = "like_button_{{ $post -> id }}">
-                <p class = "mt-2" id = "like_post_{{$post -> id}}">{{ $post -> like -> where('value', '1') -> count() }} </p>
-                <i class = "p-1 fas fa-thumbs-up"></i>
-            </div>
-            <div onclick="like_handler({{$post -> id}}, -1)" class = "
-                @if (
-                    Auth::check() &&
-                    $post -> like -> where('user_id', Auth::user() -> id) -> first() != NULL &&
-                    $post -> like -> where('user_id', Auth::user() -> id) -> first() -> value == -1
-                )
-                    text-blue
-                @else
-                    text-fg 
-                @endif
-                cursor-pointer flex flex-row items-center justify-center pr-4 mx-1" id = "dislike_button_{{ $post -> id }}">
-                <p class = "mt-2" id = "dislike_post_{{$post -> id}}">{{ $post -> like -> where('value', '-1') -> count() }} </p>
-                <i class = "p-1 mt-2 fas fa-thumbs-down"></i>
-            </div>
-            <a class = "text-fg flex flex-row items-center justify-center pr-4 mx-1">
-                <i class = "p-1 fas fa-comment"></i>
-            </a>
-            <a class = "text-fg flex flex-row items-center justify-center pr-4 mx-1">
-                <i class = "p-1 fas fa-share"></i>
-            </a>
+            @include('post.button')
         </div>
     </div>
 @endforeach
