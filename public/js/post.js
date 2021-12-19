@@ -69,8 +69,13 @@ function post_like_handler(post_id, value, csrf_token)
             );
             update_trending();
         },
-        error: function(error) {
+        error: function(xhr, error) {
             console.log(error);
+            // console.log(xhr.status);
+            if(xhr.status == 401)
+            {
+                window.open('/login', "_self");
+            }
         }
     });
 }

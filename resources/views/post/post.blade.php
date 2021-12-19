@@ -21,9 +21,9 @@
         @endif
         </div>
         <div class = "flex flex-col justify-center items-start p-1 m-2">
-            <form action="" method = "post" class = "w-full flex flex-col justify-center items-center">
+            <form action="/post/{{ $post -> id }}/comment/new" method = "post" class = "w-full flex flex-col justify-center items-center">
                 @csrf
-                <textarea name="comment" id="comment" cols="30" rows="10" class = "w-full bg-bg border border-inputBg resize-none text-fgAlt p-2 appearance-none rounded leading-tight focus:outline-none focus:shadow-outline" placeholder="Comment"></textarea>
+                <textarea name="comment" id="comment" cols="30" rows="5" class = "w-full bg-bg border border-inputBg resize-none text-fgAlt p-2 appearance-none rounded leading-tight focus:outline-none focus:shadow-outline" placeholder="Comment"></textarea>
                 <div class = "w-full flex justify-end items-center pt-2 mt-2">
                     <input type="submit" value = "Comment!" class = "shadow rounded py-2 px-3 leading-tight bg-bgButton cursor-pointer hover:bg-fg text-fgBlack transition ease-in-ou">
                 </div>
@@ -31,13 +31,7 @@
         </div>
         {{-- Comment Section --}}
         <div class = "w-full flex flex-col">
-            @forelse ($post -> comment as $comment)
-                
-            @empty
-                <div class = "w-full text-fg font-bold text-3xl text-center pb-5">
-                    <p>There is no comment</p>
-                </div>
-            @endforelse
+            @include('comment.template')
         </div>
     </div>
 @endsection
