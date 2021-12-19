@@ -16,6 +16,7 @@ module.exports = {
       bgButton: '#d8dee9',
       bgHover: '#e5e9f0',
       blue: '#5E81AC',
+      blueAlt: '#8be9fd',
       inputBg: '#434c5e',
       green: '#059669',
       red: '#BF616A',

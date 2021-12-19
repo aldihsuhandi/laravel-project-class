@@ -17,11 +17,11 @@ class Comment extends Model
 
     public function post()
     {
-        return $this ->  belongsTo(Post::class);
+        return $this->belongsTo(Post::class);
     }
 
     public function like()
     {
-        return $this -> hasMany(CommentLike::class);
+        return $this->hasMany(LikeComment::class);
     }
 }

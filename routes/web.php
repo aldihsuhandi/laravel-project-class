@@ -48,7 +48,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/trending', [HomeController::class, 'get_trending']);
 
         Route::prefix('{post_id}/comment')->group(function () {
-            Route::post('/new', [CommentController::class, 'addComment']);
+            Route::post('/new', [CommentController::class, 'add_comment']);
+            Route::post('/like', [CommentController::class, 'like_handler']);
         });
     });
 });
