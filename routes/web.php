@@ -21,10 +21,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/post/view/{post_id}', [PostController::class, 'index']);
 
-Route::get('/test', function () {
-    return view('test');
-});
-
 Route::middleware(['guest'])->group(function () {
     Route::get('/register', [UserController::class, 'registerIndex']);
     Route::post('/registering', [UserController::class, 'createUser']);
@@ -36,6 +32,7 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout']);
     Route::get('/profile', [UserController::class, 'profileIndex']);
+    Route::patch('/profile_update', [UserController::class, 'updateUser']);
 
     // post
     Route::prefix('post')->group(function () {
