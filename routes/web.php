@@ -46,7 +46,12 @@ Route::middleware(['auth'])->group(function () {
 
         Route::prefix('{post_id}/comment')->group(function () {
             Route::post('/new', [CommentController::class, 'add_comment']);
+            Route::get('/{comment_id}/delete', [CommentController::class, 'delete']);
+
+            // ajax function
             Route::post('/like', [CommentController::class, 'like_handler']);
+            Route::post('/update', [CommentController::class, 'update']);
+            Route::post('/get', [CommentController::class, 'get_comment']);
         });
     });
 });

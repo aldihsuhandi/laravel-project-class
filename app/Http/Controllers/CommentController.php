@@ -73,4 +73,45 @@ class CommentController extends Controller
 
         return response()->json($res);
     }
+
+    public function update(Request $request)
+    {
+        if ($request->ajax() == false) {
+            return abort(404);
+        }
+
+        $rules = [
+            "description" => "required"
+        ];
+
+        $request->validate($rules);
+
+        $comment_id = $request->comment_id;
+
+        Comment::where('id', $comment_id)
+            ->update([
+                "description" => $request->description
+            ]);
+
+        return response()->json([
+            'success' => "comment successfully updated!"
+        ]);
+    }
+
+    public function get_comment(Request $request)
+    {
+        if ($request->ajax() == false) {
+            return abort(404);
+        }
+
+        $comment = Comment::find($request->comment_id);
+        return response()->json($comment->description);
+    }
+
+    public function delete($post_id, $comment_id)
+    {
+        $comment = Comment::find($comment_id);
+        $comment->delete();
+        return redirect()->back();
+    }
 }

@@ -60,3 +60,90 @@ function update_comment_like(comment_id, state, like_count, dislike_count)
         $(dislike_button).css("color", "#ffffff");
     }
 }
+
+function edit_mode(comment_id)
+{
+    var description = "#comment_description_" + comment_id;
+    var form = "#comment_edit_" + comment_id;
+
+    $(description).hide();
+    $(form).show();
+}
+
+function display_mode(comment_id) 
+{
+    var description = "#comment_description_" + comment_id;
+    var form = "#comment_edit_" + comment_id;
+
+    $(form).hide();
+    $(description).show();
+}
+
+function update_comment(form_id)
+{
+    var form = document.forms[form_id];
+    var csrf_token = form["_token"].value;
+    var comment_id = form["comment_id"].value;
+    var post_id = form["post_id"].value;
+    var description = form["comment"].value;
+
+    var url = "/post/" + post_id + "/comment/update";
+    var description_id = "#comment_description_" + comment_id;
+    var error_id = "#comment_error_" + comment_id;
+
+    $.ajax({
+        url: url,
+        type: "post",
+        data: {
+            description: description,
+            comment_id: comment_id,
+            _token: csrf_token,
+        },
+        error: function(xhs, error) {
+            // console.log(xhs.status);
+            if(xhs.status == 422) 
+            {
+                $(error_id).show();
+                $(error_id).text("* Comment cannot be empty!");
+            }
+        },
+        success: function(response) {
+            console.log(response);
+            $(description_id).text(description);
+            display_mode(comment_id);
+
+            $(error_id).hide();
+            $(error_id).text("");
+        }
+    });
+}
+
+function cancel_update(form_id)
+{
+    var form = document.forms[form_id];
+    var csrf_token = form["_token"].value;
+    var comment_id = form["comment_id"].value;
+    var post_id = form["post_id"].value;
+
+    var error_id = "#comment_error_" + comment_id;
+    var url = "/post/" + post_id +  "/comment/get";
+
+    $(error_id).hide();
+    $(error_id).text("");
+
+    $.ajax({
+        url: url,
+        type: "post",
+        data: {
+            comment_id: comment_id,
+            _token: csrf_token,
+        },
+        success: function(data) {
+            form["comment"].value = data;
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+    display_mode(comment_id);
+}

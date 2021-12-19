@@ -26,7 +26,8 @@
     <p class = "mt-2" id = "dislike_post_{{$post -> id}}">{{ $post -> like -> where('value', '-1') -> count() }} </p>
     <i class = "p-1 mt-2 fas fa-thumbs-down"></i>
 </div>
-<a class = "text-fg flex flex-row items-center justify-center pr-4 mx-1">
+<a class = "text-fg flex flex-row items-center justify-center pr-4 mx-1 mt-2">
+    {{ $post -> comment -> count() }}
     <i class = "p-1 fas fa-comment"></i>
 </a>
 <a class = "text-fg flex flex-row items-center justify-center pr-4 mx-1">
