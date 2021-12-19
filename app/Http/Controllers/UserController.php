@@ -12,7 +12,7 @@ class UserController extends Controller
         $rules = [
             'email' => "required|email|unique:users,email",
             'username' => "required|min:5",
-            'password' => "required|min:6|alphanumeric",
+            'password' => "required|min:6|alphanum",
         ];
 
         $request->validate($rules);
