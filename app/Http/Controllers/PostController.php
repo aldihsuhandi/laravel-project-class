@@ -21,7 +21,7 @@ class PostController extends Controller
     public function createPostIndex()
     {
         $categories = Category::all();
-        return view('newpost')->with('categories', $categories);
+        return view('post.newpost')->with('categories', $categories);
     }
 
     public function insertPost(Request $request)
@@ -48,9 +48,9 @@ class PostController extends Controller
 
         $post->save();
         /*
-            redirect ke /post/new sementara karena belum ada page home.blade nya
+            After inserting post, you will automatically goes to home.blade.php
         */
-        return redirect('/post/new');
+        return redirect('/');
     }
 
     /**
