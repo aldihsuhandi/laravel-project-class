@@ -24,7 +24,7 @@
                 @else
                     text-fg 
                 @endif
-                cursor-pointer flex flex-row items-center justify-center pr-4 mx-1" id = "like_comment_{{ $post -> id }}">
+                cursor-pointer flex flex-row items-center justify-center pr-4 mx-1" id = "like_comment_{{ $comment-> id }}">
                 <p class = "mt-2" id = "likecounter_comment_{{$comment -> id}}">{{ $comment -> like -> where('value', '1') -> count() }} </p>
                 <i class = "p-1 fas fa-thumbs-up"></i>
             </div>
@@ -38,7 +38,7 @@
                 @else
                     text-fg 
                 @endif
-                cursor-pointer flex flex-row items-center justify-center pr-4 mx-1" id = "dislike_comment_{{ $post -> id }}">
+                cursor-pointer flex flex-row items-center justify-center pr-4 mx-1" id = "dislike_comment_{{ $comment -> id }}">
                 <p class = "mt-2" id = "dislikecounter_comment_{{$comment -> id}}">{{ $comment -> like -> where('value', '-1') -> count() }} </p>
                 <i class = "p-1 mt-2 fas fa-thumbs-down"></i>
             </div>
