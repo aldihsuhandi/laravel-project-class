@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -23,37 +24,52 @@ class UserController extends Controller
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
         $user->description = "";
-        $user->profile_img = "";
+        $user->profile_img = "image/blank_profile.png";
         $user->save();
 
         return redirect('/login');
     }
 
-    function updateUser(Request $request) {
+    function updateUser(Request $request)
+    {
         $rules = [
-            'email' => "required|email|unique:users,email",
+            'email' => "required|email",
             'username' => "required|min:5",
-            'password' => "required|min:6|alphanum",
-            'description' => "nullable|min:10",
-            // 'image' => "nullable|image", // !Gak Terlalu Butuh Buat Sekarang
+            'password' => "nullable|min:6|alphanum",
+            'image' => "nullable|image",
         ];
 
         $request->validate($rules);
 
-        $user = User::find(Auth::user()->id);
-
-        // !Masih Gagal Update ke Database
-        if(isset($request->name)) {
-            $user->username = $request->name;
+        if ($request->hasFile('image')) {
+            $image = $request->image;
+            $image = Storage::put('public/profile', $image, 'public');
+            $image = explode('/', $image)[2];
+            $image = 'storage/profile/' . $image;
+            User::where('id', Auth::user()->id)
+                ->update([
+                    'profile_img' => $image,
+                ]);
         }
 
-        $user->email = $request->email;
+        $description = $request->description;
+        if ($description == null) $description = "";
 
-        $user->password = $request->password;
+        User::where('id', Auth::user()->id)
+            ->update([
+                'email' => $request->email,
+                'username' => $request->username,
+                'description' => $description,
+            ]);
 
-        $user->description = $request->description;
+        if ($request->password != NULL) {;
+            User::where('id', Auth::user()->id)
+                ->update([
+                    'password' => bcrypt($request->password),
+                ]);
+        }
 
-        $user->save();
+        return redirect()->back();
     }
 
     function registerIndex()

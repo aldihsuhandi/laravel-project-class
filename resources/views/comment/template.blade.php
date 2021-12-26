@@ -22,6 +22,10 @@
         <div class = "px-4 mx-5 py-2 text-fg" id = "comment_description_{{ $comment -> id }}">
             {{ $comment -> description }}
         </div>
+        @if (
+            Auth::check() &&
+            Auth::user() -> id == $comment -> user -> id
+        )
         <div class = "px-4 mx-5 py-2 text-fg hidden" id = "comment_edit_{{ $comment -> id }}">
             <form name = "form_edit_{{ $comment -> id }}" class = "w-full">
                 @csrf
@@ -35,6 +39,7 @@
                 </div>
             </form>
         </div>
+        @endif
         <div class = "flex flex-row justify-start items-center">
             @include('comment.templatebutton')
         </div>

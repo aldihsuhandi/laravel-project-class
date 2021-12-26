@@ -31,8 +31,12 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout']);
-    Route::get('/profile', [UserController::class, 'profileIndex']);
-    Route::patch('/profile_update', [UserController::class, 'updateUser']);
+
+    // profile
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [UserController::class, 'profileIndex']);
+        Route::patch('/update', [UserController::class, 'updateUser']);
+    });
 
     // post
     Route::prefix('post')->group(function () {
@@ -40,13 +44,18 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/new', [PostController::class, 'createPostIndex']);
         Route::post('/new', [PostController::class, 'insertPost']);
 
+        Route::get('/delete', [PostController::class, 'deletePost']);
+
         // ajax function
         Route::post('/like', [PostController::class, 'like_handler']);
         Route::get('/trending', [HomeController::class, 'get_trending']);
 
+        Route::get('/get', [PostController::class, 'get_post']);
+        Route::post('/update', [PostController::class, 'update_post']);
+
         Route::prefix('{post_id}/comment')->group(function () {
             Route::post('/new', [CommentController::class, 'add_comment']);
-            Route::get('/{comment_id}/delete', [CommentController::class, 'delete']);
+            Route::post('/delete', [CommentController::class, 'delete']);
 
             // ajax function
             Route::post('/like', [CommentController::class, 'like_handler']);

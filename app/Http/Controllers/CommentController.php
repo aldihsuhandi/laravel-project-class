@@ -108,9 +108,9 @@ class CommentController extends Controller
         return response()->json($comment->description);
     }
 
-    public function delete($post_id, $comment_id)
+    public function delete(Request $request, $post_id)
     {
-        $comment = Comment::find($comment_id);
+        $comment = Comment::find($request->comment_id);
         $comment->delete();
         return redirect()->back();
     }

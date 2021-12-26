@@ -15,7 +15,8 @@ class PostController extends Controller
     public function index($post_id)
     {
         $post = Post::find($post_id);
-        return view('post.post', ["post" => $post]);
+        $categories = Category::all();
+        return view('post.post', ["post" => $post, "categories" => $categories]);
     }
 
     public function createPostIndex()
@@ -50,6 +51,13 @@ class PostController extends Controller
         /*
             After inserting post, you will automatically goes to home.blade.php
         */
+        return redirect('/');
+    }
+
+    public function deletePost(Request $request)
+    {
+        $post = Post::find($request->post_id);
+        $post->delete();
         return redirect('/');
     }
 
@@ -93,5 +101,51 @@ class PostController extends Controller
             "state" => $state,
         ];
         return response()->json($count);
+    }
+
+    /**
+     * Access this method using ajax
+     * Don't access it with route
+     */
+    public function get_post(Request $request)
+    {
+        if ($request->ajax() == false) {
+            return abort(404);
+        }
+
+        $post = Post::find($request->post_id);
+        $resp = [
+            'id' => $post->id,
+            'title' => $post->title,
+            'category' => $post->category->name,
+            'category_id' => $post->category->id,
+            'description' => $post->description
+        ];
+        return response()->json($resp);
+    }
+
+    /**
+     * Access this method using ajax
+     * Don't access it with route
+     */
+    public function update_post(Request $request)
+    {
+        if ($request->ajax() == false) {
+            return abort(404);
+        }
+
+        Post::where('id', $request->id)
+            ->update([
+                'title' => $request->title,
+                'description' => $request->description,
+                'category_id' => $request->category_id,
+            ]);
+
+        return response()->json(
+            [
+                'success' => "post successfully updated"
+            ],
+            200
+        );
     }
 }

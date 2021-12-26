@@ -25,8 +25,8 @@
                 <div class = "p-1 text-red text-sm">* {{ $message }}</div>
             @enderror
             <label for="password" class="text-fg flex flex-col pt-2 mt-2">Password</label>
-            <input type="password" class="bg-bgAlt py-2 px-3 block text-fgAlt appearance-none rounded w-11/12 leading-tight focus:outline-none focus:shadow-outline" id="passwor" name="password">
-            @error('username')
+            <input type="password" class="bg-bgAlt py-2 px-3 block text-fgAlt appearance-none rounded w-11/12 leading-tight focus:outline-none focus:shadow-outline" id="password" name="password">
+            @error('password')
                 <div class = "p-1 text-red text-sm">* {{ $message }}</div>
             @enderror
             <br>

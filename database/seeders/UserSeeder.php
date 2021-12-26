@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'email' => 'user@user1.com',
             'password' => bcrypt('password'),
             'description' => 'this is user description',
-            'profile_img' => "",
+            'profile_img' => "image/blank_profile.png",
         ]);
 
         DB::table('users')->insert([
@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
             'email' => 'user@user2.com',
             'password' => bcrypt('password'),
             'description' => 'this is user description',
-            'profile_img' => "",
+            'profile_img' => "image/blank_profile.png",
         ]);
     }
 }

@@ -3,15 +3,22 @@
 @section('content')
     <div class = "rounded flex flex-col w-3/5 bg-bg p-3 m-3 relative shadow-md">
         {{-- post design --}}
-        <div class = "flex flex-col justify-center items-start p-1 m-2">
-            <div class = "text-fg font-bold text-2xl">{{ $post -> title }}</div>
-            <div class = "text-fg font-base text-base py-2">
+        <div class = "flex flex-col justify-center items-start p-1 m-2" id = "post_view_{{ $post -> id }}">
+            <div class = "text-fg font-bold text-2xl" id = "post_title_{{ $post -> id }}">{{ $post -> title }}</div>
+            <div class = "text-fg text-sm text-grey" id = "post_category_{{ $post -> id }}">{{ $post -> category -> name }}</div>
+            <div class = "text-fg font-base text-base py-2" id = "post_description_{{ $post -> id }}">
                 {{ $post -> description }}
             </div>
-            <div class = "flex flex-row">
+            <div class = "flex flex-row items-center">
                 @include('post.button')
             </div>
         </div>
+        @if (
+            Auth::check() &&
+            Auth::user() -> id == $post -> user -> id
+        )
+            @include('post.editform')
+        @endif
         {{-- add comment --}}
         <div class = "px-1 mx-2 text-sm text-fg">
         @if (Auth::check() == false)
@@ -39,4 +46,5 @@
 @section('script')
 <script src = "{{ asset('js/post.js') }}"></script>
 <script src = "{{ asset('js/comment.js') }}"></script>
+<script src = "{{ asset('js/post.js') }}"></script>
 @endsection

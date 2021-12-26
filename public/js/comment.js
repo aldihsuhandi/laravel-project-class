@@ -61,7 +61,7 @@ function update_comment_like(comment_id, state, like_count, dislike_count)
     }
 }
 
-function edit_mode(comment_id)
+function comment_edit_mode(comment_id)
 {
     var description = "#comment_description_" + comment_id;
     var form = "#comment_edit_" + comment_id;
@@ -70,7 +70,7 @@ function edit_mode(comment_id)
     $(form).show();
 }
 
-function display_mode(comment_id) 
+function comment_display_mode(comment_id) 
 {
     var description = "#comment_description_" + comment_id;
     var form = "#comment_edit_" + comment_id;
@@ -110,7 +110,7 @@ function update_comment(form_id)
         success: function(response) {
             console.log(response);
             $(description_id).text(description);
-            display_mode(comment_id);
+            comment_display_mode(comment_id);
 
             $(error_id).hide();
             $(error_id).text("");
@@ -145,5 +145,5 @@ function cancel_update(form_id)
             console.log(error);
         }
     });
-    display_mode(comment_id);
+    comment_display_mode(comment_id);
 }

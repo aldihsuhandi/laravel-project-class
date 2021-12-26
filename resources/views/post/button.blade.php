@@ -30,6 +30,23 @@
     {{ $post -> comment -> count() }}
     <i class = "p-1 fas fa-comment"></i>
 </a>
-<a class = "text-fg flex flex-row items-center justify-center pr-4 mx-1">
+@if (
+    Auth::check() && 
+    Auth::user() -> id == $post -> user -> id
+)
+    <div onclick="post_edit_mode({{ $post -> id }})" class = "text-fg cursor-pointer flex flex-row items-center justify-center pr-4 mx-1 mt-2" id = "edit_post_{{ $post -> id }}">
+        <i class = "fas fa-pen"></i>
+    </div>
+
+    <form action="/post/delete" method = "post">
+        @csrf
+        <input type="hidden" name="post_id" value = {{ $post -> id }}>
+        <button class = "text-fg cursor-pointer flex flex-row items-center justify-center pr-4 mx-1 mt-2">
+            <i class = "fas fa-trash"></i>
+        </button>
+    </form>
+    
+@endif
+<a class = "text-fg flex flex-row items-center justify-center pr-4 mx-1 mt-2">
     <i class = "p-1 fas fa-share"></i>
 </a>

@@ -31,12 +31,15 @@
     Auth::check() &&
     Auth::user() -> id == $comment -> user -> id
 )
-    <div onclick="edit_mode({{ $comment -> id }})" class = "text-fg cursor-pointer flex flex-row items-center justify-center pr-4 mx-1 mt-2" id = "edit_comment_{{ $comment -> id }}">
+    <div onclick="comment_edit_mode({{ $comment -> id }})" class = "text-fg cursor-pointer flex flex-row items-center justify-center pr-4 mx-1 mt-2" id = "edit_comment_{{ $comment -> id }}">
         <i class = "fas fa-pen"></i>
     </div>
 
-    <a href = "/post/{{ $post -> id }}/comment/{{ $comment -> id }}/delete" class = "text-fg cursor-pointer flex flex-row items-center justify-center pr-4 mx-1 mt-2" id = "edit_comment_{{ $comment -> id }}">
-        <i class = "fas fa-trash"></i>
-    </a>
+    <form action="/post/{{ $post -> id }}/comment/delete" method = "post">
+        <input type="hidden" name="comment_id" value = "{{ $comment -> id }}">
+        <button class = "text-fg cursor-pointer flex flex-row items-center justify-center pr-4 mx-1 mt-2"">
+            <i class = "fas fa-trash"></i>
+        </a>
+    </form>
     
 @endif

@@ -6,7 +6,6 @@
 <div class = "flex flex-col py-5 mx-5 w-3/5 items-center justify-center">
     <div class = "w-full flex justify-between items-end">
         <p class = "text-fg text-xl font-bold">Trending</p>
-        <p class = "text-fg">Show all Trending</p>
     </div>
     <div class = "w-full flex flex-row justify-evenly items-center py-2 my-2" id = "trending_container">
         @include('post.cardtemplate')
