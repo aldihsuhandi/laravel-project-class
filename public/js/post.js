@@ -30,13 +30,13 @@ function update_post_like(post_id, state, like_count, dislike_count)
     // update color
     if(state == "like")
     {
-        $(like_button).css("color", "#5E81AC");
+        $(like_button).css("color", "#8be9fd");
         $(dislike_button).css("color", "#ffffff");
     }
     else if(state == "dislike")
     {
         $(like_button).css("color", "#ffffff");
-        $(dislike_button).css("color", "#5E81AC");
+        $(dislike_button).css("color", "#8be9fd");
     }
     else 
     {
@@ -158,6 +158,7 @@ function save_post_update(post_id)
             console.log(response);
             get_post(post_id);
             post_display_mode(post_id);
+            update_trending();
         },
         error: function(error) {
             console.log(error);

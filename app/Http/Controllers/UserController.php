@@ -13,8 +13,9 @@ class UserController extends Controller
     {
         $rules = [
             'email' => "required|email|unique:users,email",
-            'username' => "required|min:5",
+            'username' => "required|min:5|unique:users,username",
             'password' => "required|min:6|alphanum",
+            'confirm' => "required|same:password"
         ];
 
         $request->validate($rules);
@@ -34,8 +35,8 @@ class UserController extends Controller
     {
         $rules = [
             'email' => "required|email",
-            'username' => "required|min:5",
-            'password' => "nullable|min:6|alphanum",
+            'username' => "required|min:5|alpha_dash",
+            'password' => "nullable|min:6|alpha_num",
             'image' => "nullable|image",
         ];
 
@@ -82,8 +83,21 @@ class UserController extends Controller
         return view('authenticate.login');
     }
 
-    function profileIndex()
+    function profileIndex($username)
     {
-        return view('profile');
+        $user = User::where('username', $username) -> first();
+        $posts = $user -> post;
+        $comments = $user -> comment;
+        return view('profile.index', [
+            "user" => $user,
+            "posts" => $posts,
+            "comments" => $comments,
+            "action" => "user-profile"
+        ]);
+    }
+
+    function update_index()
+    {
+        return view('profile.update');
     }
 }

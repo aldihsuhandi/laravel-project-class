@@ -29,6 +29,11 @@
             @error('password')
                 <div class = "p-1 text-red text-sm">* {{ $message }}</div>
             @enderror
+            <label for="confirm" class="text-fg flex flex-col pt-2 mt-2">Confirm Password</label>
+            <input type="password" class="bg-bgAlt py-2 px-3 block text-fgAlt appearance-none rounded w-11/12 leading-tight focus:outline-none focus:shadow-outline" id="confirm" name="confirm">
+            @error('confirm')
+                <div class = "p-1 text-red text-sm">* {{ $message }}</div>
+            @enderror
             <br>
             <br>
             <input type="submit" class="shadow rounded w-11/12 py-2 px-3 leading-tight bg-bgButton cursor-pointer hover:bg-fg text-fgBlack transition ease-in-out" value="Register">

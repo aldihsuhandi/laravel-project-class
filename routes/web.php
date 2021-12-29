@@ -33,9 +33,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout']);
 
     // profile
-    Route::prefix('profile')->group(function () {
-        Route::get('/', [UserController::class, 'profileIndex']);
+    Route::prefix('user')->group(function () {
+        Route::get('/update', [UserController::class, 'update_index']);
         Route::patch('/update', [UserController::class, 'updateUser']);
+        Route::get('/{username}', [UserController::class, 'profileIndex']);
     });
 
     // post

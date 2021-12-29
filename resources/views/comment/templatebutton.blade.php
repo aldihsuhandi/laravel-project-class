@@ -1,10 +1,10 @@
-<div onclick="comment_like_handler({{ $post -> id }}, {{$comment -> id}}, 1, '{{ csrf_token() }}')" class = "
+<div onclick="comment_like_handler({{ $comment -> post -> id }}, {{$comment -> id}}, 1, '{{ csrf_token() }}')" class = "
     @if (
         Auth::check() &&
         $comment -> like -> where('user_id', Auth::user() -> id) -> first() != NULL &&
         $comment -> like -> where('user_id', Auth::user() -> id) -> first() -> value == 1
     )
-        text-blue
+        text-blueAlt
     @else
         text-fg 
     @endif
@@ -12,13 +12,13 @@
     <p class = "mt-2" id = "likecounter_comment_{{$comment -> id}}">{{ $comment -> like -> where('value', '1') -> count() }} </p>
     <i class = "p-1 fas fa-thumbs-up"></i>
 </div>
-<div onclick="comment_like_handler({{$post -> id}}, {{$comment -> id}}, -1, '{{ csrf_token() }}')" class = "
+<div onclick="comment_like_handler({{$comment -> post -> id}}, {{$comment -> id}}, -1, '{{ csrf_token() }}')" class = "
     @if (
         Auth::check() &&
         $comment -> like -> where('user_id', Auth::user() -> id) -> first() != NULL &&
         $comment -> like -> where('user_id', Auth::user() -> id) -> first() -> value == -1
     )
-        text-blue
+        text-blueAlt
     @else
         text-fg 
     @endif
@@ -35,7 +35,7 @@
         <i class = "fas fa-pen"></i>
     </div>
 
-    <form action="/post/{{ $post -> id }}/comment/delete" method = "post">
+    <form action="/post/{{ $comment -> post -> id }}/comment/delete" method = "post">
         <input type="hidden" name="comment_id" value = "{{ $comment -> id }}">
         <button class = "text-fg cursor-pointer flex flex-row items-center justify-center pr-4 mx-1 mt-2"">
             <i class = "fas fa-trash"></i>

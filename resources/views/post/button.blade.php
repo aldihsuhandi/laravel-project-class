@@ -4,7 +4,7 @@
         $post -> like -> where('user_id', Auth::user() -> id) -> first() != NULL &&
         $post -> like -> where('user_id', Auth::user() -> id) -> first() -> value == 1
     )
-        text-blue
+        text-blueAlt
     @else
         text-fg 
     @endif
@@ -18,7 +18,7 @@
         $post -> like -> where('user_id', Auth::user() -> id) -> first() != NULL &&
         $post -> like -> where('user_id', Auth::user() -> id) -> first() -> value == -1
     )
-        text-blue
+        text-blueAlt
     @else
         text-fg 
     @endif
