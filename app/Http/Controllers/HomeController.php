@@ -19,7 +19,7 @@ class HomeController extends Controller
         $categories = Category::all();
 
         if ($request->ajax()) {
-            return view('post.template', ["posts" => $posts]);
+            return view('post.template', ["posts" => $posts, "categories" => $categories]);
         }
 
         return view(

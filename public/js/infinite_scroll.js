@@ -5,6 +5,9 @@ function loadMore(page)
     $.ajax({
         url: '?page=' + page,
         type: 'get',
+        error: function(error){
+            console.log(error);
+        }
     }).done(function(data) {
         console.log(data);
         if(data == "")
