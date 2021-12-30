@@ -5,7 +5,7 @@
         {{-- post design --}}
         <div class = "flex flex-col justify-center items-start p-1 m-2" id = "post_view_{{ $post -> id }}">
             <div class = "text-fg font-bold text-2xl" id = "post_title_{{ $post -> id }}">{{ $post -> title }}</div>
-            <div class = "text-fg text-sm text-grey" id = "post_category_{{ $post -> id }}">{{ $post -> category -> name }}</div>
+            <a href = "/search?category={{ $post -> category -> id }}" class = "text-fg text-sm text-grey" id = "post_category_{{ $post -> id }}">{{ $post -> category -> name }}</a>
             <div class = "text-fg font-base text-base py-2" id = "post_description_{{ $post -> id }}">
                 {{ $post -> description }}
             </div>
@@ -14,18 +14,18 @@
             </div>
         </div>
         @if (
-            Auth::check() &&
-            Auth::user() -> id == $post -> user -> id
-        )
+                Auth::check() &&
+                Auth::user() -> id == $post -> user -> id
+            )
             @include('post.editform')
         @endif
         {{-- add comment --}}
         <div class = "px-1 mx-2 text-sm text-fg">
-        @if (Auth::check() == false)
-            <a href="/login" class="decoration-none text-blue">Login!</a> to comment
-        @else
-            comment as <a href="" class = "decoration-none text-blue">{{ Auth::user() -> username }}</a>
-        @endif
+            @if (Auth::check() == false)
+                <a href="/login" class="decoration-none text-blue">Login!</a> to comment
+            @else
+                comment as <a href="" class = "decoration-none text-blue">{{ Auth::user() -> username }}</a>
+            @endif
         </div>
         <div class = "flex flex-col justify-center items-start p-1 m-2">
             <form action="/post/{{ $post -> id }}/comment/new" method = "post" class = "w-full flex flex-col justify-center items-center">
@@ -44,7 +44,7 @@
 @endsection
 
 @section('script')
-<script src = "{{ asset('js/post.js') }}"></script>
-<script src = "{{ asset('js/comment.js') }}"></script>
-<script src = "{{ asset('js/post.js') }}"></script>
+    <script src = "{{ asset('js/post.js') }}"></script>
+    <script src = "{{ asset('js/comment.js') }}"></script>
+    <script src = "{{ asset('js/post.js') }}"></script>
 @endsection

@@ -45,4 +45,27 @@ class HomeController extends Controller
 
         return view('post.cardtemplate', ["trending" => $trending]);
     }
+
+    public function search(Request $request) 
+    {
+        $categories = Category::all();
+        // title filtering
+        $posts = Post::where('title', 'like', '%'.$request -> search.'%') -> get();
+
+        // category filtering
+        if(isset($request -> category) && $request -> category != -1) {
+            $posts = $posts -> where('category_id', $request -> category);
+        }
+
+        return view(
+            'search',
+            [
+                "action" => "search",
+                "search" => $request -> search,
+                "category_id" => $request -> category,
+                "categories" => $categories,
+                "posts" => $posts,
+            ]
+        );
+    }
 }

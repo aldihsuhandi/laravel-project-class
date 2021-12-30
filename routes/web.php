@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/post/view/{post_id}', [PostController::class, 'index']);
+Route::get('/search', [HomeController::class, 'search']);
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/register', [UserController::class, 'registerIndex']);

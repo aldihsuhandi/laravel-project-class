@@ -1,9 +1,9 @@
 @forelse ($posts as $post)
-    <div class = "relative p-3 rounded shadow-md 
+    <div class = "relative p-3 rounded shadow-md
     @if (isset($action) && $action == "user-profile")
         bg-fgBlack
     @else
-        bg-bg 
+        bg-bg
     @endif
     w-full my-2">
         <div id = "post_view_{{ $post -> id }}">
@@ -12,15 +12,15 @@
                 <div class = "font-base text-md text-fg" id = "post_category_{{ $post -> id }}">{{ $post -> category -> name }}</div>
             </a>
             <a href = "/user/{{ $post -> user -> username }}" class = "flex flex-row justify-start items-center w-full">
-                <img src="{{ asset($post -> user -> profile_img) }}" alt="" height = 25px width = 25px class = "rounded-full">
+                <div class = "bg-fg rounded-full bg-cover bg-no-repeat bg-center" style = "height: 25px;width: 25px;background-image: url('{{ asset($post -> user -> profile_img) }}');"></div>
                 <div class = "
                 @if(
                     Auth::check() &&
                     $post -> user -> id == Auth::user() -> id
-                )
-                text-blue
+                    )
+                    text-blue
                 @else
-                text-fg 
+                    text-fg
                 @endif
                 text-md pl-1">{{ $post -> user -> username }}</div>
             </a>
@@ -34,7 +34,7 @@
         @if (
             Auth::check() &&
             Auth::user() -> id == $post -> user -> id
-        )
+            )
             @include('post.editform')
         @endif
     </div>

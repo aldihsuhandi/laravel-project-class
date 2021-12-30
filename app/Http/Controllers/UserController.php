@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -88,11 +89,13 @@ class UserController extends Controller
         $user = User::where('username', $username) -> first();
         $posts = $user -> post;
         $comments = $user -> comment;
+        $categories = Category::all();
         return view('profile.index', [
             "user" => $user,
             "posts" => $posts,
             "comments" => $comments,
-            "action" => "user-profile"
+            "categories" => $categories,
+            "action" => "user-profile",
         ]);
     }
 

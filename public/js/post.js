@@ -116,9 +116,9 @@ function get_post(post_id)
             post_id: post_id,
         },
         success: function(response) {
-            console.log(response);
             $(title).text(response["title"]);
             $(category).text(response["category"]);
+            $(category).attr("href", "/search?category=" + response["category_id"]);
             $(description).text(response["description"]);
 
             form["title"].value = response["title"];
