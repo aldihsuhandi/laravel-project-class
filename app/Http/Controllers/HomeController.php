@@ -19,6 +19,11 @@ class HomeController extends Controller
         $categories = Category::all();
 
         if ($request->ajax()) {
+            if($posts -> isEmpty()) {
+                return response() -> json([
+                    'isEmpty' => true,
+                ]);
+            }
             return view('post.template', ["posts" => $posts, "categories" => $categories]);
         }
 

@@ -9,8 +9,7 @@ function loadMore(page)
             console.log(error);
         }
     }).done(function(data) {
-        console.log(data);
-        if(data == "")
+        if(data["isEmpty"] == true)
         {
             load = false;
             return;
