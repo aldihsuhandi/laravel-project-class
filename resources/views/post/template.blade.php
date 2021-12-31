@@ -11,7 +11,7 @@
                 <div class = "font-semibold text-xl text-fg" id = "post_title_{{ $post -> id }}">{{ $post -> title }}</div>
                 <div class = "font-base text-md text-fg" id = "post_category_{{ $post -> id }}">{{ $post -> category -> name }}</div>
             </a>
-            <a href = "/user/{{ $post -> user -> username }}" class = "flex flex-row justify-start items-center w-full">
+            <a href = "/user/u/{{ $post -> user -> username }}" class = "flex flex-row justify-start items-center w-full">
                 <div class = "bg-fg rounded-full bg-cover bg-no-repeat bg-center" style = "height: 25px;width: 25px;background-image: url('{{ asset($post -> user -> profile_img) }}');"></div>
                 <div class = "
                 @if(

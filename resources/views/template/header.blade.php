@@ -3,7 +3,7 @@
         <img src="{{ asset('icon/logoReadIt.png') }}" alt="" class = "h-16">
     </a>
     <div class = "w-3/4">
-        <form action="/search" method="get" class = "m-0 w-full flex flex-col justify-start items-start">
+        <form name = "search" action="/search" method="get" class = "m-0 w-full flex flex-col justify-start items-start">
             <div class = "w-2/3 bg-bgAlt mx-3 px-2 rounded-md flex flex-row justify-center items-center">
                 <i class = "fas fa-search text-fg"></i>
                 <input type="text" name = "search" class = "focus:outline-none w-11/12 p-2 bg-white rounded-md bg-bgAlt text-fg" placeholder="Search" @if (isset($search)) value = "{{ $search }}" @endif>

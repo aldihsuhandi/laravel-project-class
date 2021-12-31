@@ -42,7 +42,6 @@
 @endsection
 
 @section('script')
-    <script src = {{ asset('js/search.js' )}}></script>
     <script src = {{ asset('js/post.js' )}}></script>
     <script src = {{ asset('js/infinite_scroll.js' )}}></script>
 @endsection

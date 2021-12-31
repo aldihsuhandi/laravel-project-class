@@ -62,6 +62,19 @@ class HomeController extends Controller
             $posts = $posts -> where('category_id', $request -> category);
         }
 
+        if($request -> ajax()) {
+            return view(
+                'post.template',
+                [
+                    "action" => "search",
+                    "search" => $request -> search,
+                    "category_id" => $request -> category,
+                    "categories" => $categories,
+                    "posts" => $posts,
+                ]
+            );
+        }
+
         return view(
             'search',
             [

@@ -1,12 +1,12 @@
 <div class = "bg-bgAlt shadow-md rounded p-3 m-3 flex flex-col">
     <div class = "flex flex-row justify-start items-center text-fg">
-        <img src="{{ asset($comment -> user -> profile_img) }}" alt="" height = 25px width = 25px class = "rounded-full">
-        <a class = "px-1 
+        <div class = "bg-fg rounded-full bg-cover bg-no-repeat bg-center" style = "height: 25px;width: 25px;background-image: url('{{ asset($comment -> user -> profile_img) }}');"></div>
+        <a href = "/user/u/{{ $comment -> user -> username }}" class = "px-1
         @if (
-            Auth::check() && 
+            Auth::check() &&
             Auth::user() -> id == $comment -> user_id
         )
-            text-blueAlt 
+            text-blueAlt
         @else
             text-fg
         @endif
