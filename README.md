@@ -11,6 +11,8 @@ https://drive.google.com/file/d/1_Rs6vHyEz7-i9U7C1aAK_JuQOQTEPttP/view
 composer update
 npm install
 npm update
+npm build
+npm run dev
 cp .env.example .env
 php artisan key:generate
 php artisan storage:link
