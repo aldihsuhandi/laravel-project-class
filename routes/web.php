@@ -49,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/new', [PostController::class, 'createPostIndex']);
         Route::post('/new', [PostController::class, 'insertPost']);
 
-        Route::get('/delete', [PostController::class, 'deletePost']);
+        Route::post('/delete', [PostController::class, 'deletePost']);
 
         // ajax function
         Route::post('/like', [PostController::class, 'like_handler']);
@@ -69,4 +69,3 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 });
-

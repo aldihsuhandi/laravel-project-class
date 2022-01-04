@@ -18,7 +18,7 @@ class PostSeeder extends Seeder
         // this is for testing purposes
         for ($i = 0; $i < 20; ++$i) {
             DB::table('posts')->insert([
-                "category_id" => 1,
+                "category_id" => rand(1, 5),
                 "user_id" => rand(1, 2),
                 "title" => "test post" . $i,
                 "description" => "test description",

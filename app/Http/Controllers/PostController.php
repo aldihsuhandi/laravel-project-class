@@ -58,7 +58,7 @@ class PostController extends Controller
     {
         $post = Post::find($request->post_id);
         $post->delete();
-        return redirect('/');
+        return redirect()->back();
     }
 
     /**

@@ -1,21 +1,19 @@
-function update_trending()
-{
+function update_trending() {
     var url = "/post/trending";
     $.ajax({
         url: url,
-        type: 'get',
-        error: function(error) {
+        type: "get",
+        error: function (error) {
             console.log(error);
-        }
-    }).done(function(data) {
+        },
+    }).done(function (data) {
         console.log(data);
         $("#trending_container").empty();
         $("#trending_container").append(data);
     });
 }
 
-function update_post_like(post_id, state, like_count, dislike_count)
-{
+function update_post_like(post_id, state, like_count, dislike_count) {
     var like_button = "#like_button_" + post_id;
     var dislike_button = "#dislike_button_" + post_id;
     var like_counter = "#like_post_" + post_id;
@@ -28,25 +26,19 @@ function update_post_like(post_id, state, like_count, dislike_count)
     $(dislike_counter).text(dislike_count);
 
     // update color
-    if(state == "like")
-    {
+    if (state == "like") {
         $(like_button).css("color", "#8be9fd");
         $(dislike_button).css("color", "#ffffff");
-    }
-    else if(state == "dislike")
-    {
+    } else if (state == "dislike") {
         $(like_button).css("color", "#ffffff");
         $(dislike_button).css("color", "#8be9fd");
-    }
-    else 
-    {
+    } else {
         $(like_button).css("color", "#ffffff");
         $(dislike_button).css("color", "#ffffff");
     }
 }
-    
-function post_like_handler(post_id, value, csrf_token)
-{
+
+function post_like_handler(post_id, value, csrf_token) {
     console.log(post_id, value);
     var url = "/post/like";
 
@@ -58,30 +50,28 @@ function post_like_handler(post_id, value, csrf_token)
             value: value,
             _token: csrf_token,
         },
-        success: function(response){
+        success: function (response) {
             console.log("Success");
             console.log(response);
             update_post_like(
-                post_id, 
-                response["state"], 
+                post_id,
+                response["state"],
                 response["like_count"],
                 response["dislike_count"]
             );
             update_trending();
         },
-        error: function(xhr, error) {
+        error: function (xhr, error) {
             console.log(error);
             // console.log(xhr.status);
-            if(xhr.status == 401)
-            {
-                window.open('/login', "_self");
+            if (xhr.status == 401) {
+                window.open("/login", "_self");
             }
-        }
+        },
     });
 }
 
-function post_edit_mode(post_id)
-{
+function post_edit_mode(post_id) {
     var post = "#post_view_" + post_id;
     var form = "#post_form_" + post_id;
 
@@ -89,8 +79,7 @@ function post_edit_mode(post_id)
     $(form).show();
 }
 
-function post_display_mode(post_id)
-{
+function post_display_mode(post_id) {
     var post = "#post_view_" + post_id;
     var form = "#post_form_" + post_id;
 
@@ -98,8 +87,7 @@ function post_display_mode(post_id)
     $(form).hide();
 }
 
-function get_post(post_id)
-{
+function get_post(post_id) {
     var url = "/post/get";
 
     var form_id = "post_edit_" + post_id;
@@ -107,38 +95,40 @@ function get_post(post_id)
 
     var title = "#post_title_" + post_id;
     var category = "#post_category_" + post_id;
+    var category_text = "#post_category_text_" + post_id;
     var description = "#post_description_" + post_id;
 
     $.ajax({
         url: url,
-        type: 'get',
+        type: "get",
         data: {
             post_id: post_id,
         },
-        success: function(response) {
+        success: function (response) {
             $(title).text(response["title"]);
-            $(category).text(response["category"]);
-            $(category).attr("href", "/search?category=" + response["category_id"]);
+            $(category).attr(
+                "href",
+                "/search?category=" + response["category_id"]
+            );
+            $(category_text).text(response["category"]);
             $(description).text(response["description"]);
 
             form["title"].value = response["title"];
             form["description"].value = response["description"];
             form["category"].value = response["category_id"];
         },
-        error: function(error) {
+        error: function (error) {
             console.log(error);
-        }
+        },
     });
 }
 
-function cancel_post_update(post_id)
-{
+function cancel_post_update(post_id) {
     post_display_mode(post_id);
     get_post(post_id);
 }
 
-function save_post_update(post_id)
-{
+function save_post_update(post_id) {
     var url = "/post/update";
 
     var form_id = "post_edit_" + post_id;
@@ -154,15 +144,14 @@ function save_post_update(post_id)
             description: form["description"].value,
             _token: form["_token"].value,
         },
-        success: function(response) {
+        success: function (response) {
             console.log(response);
             get_post(post_id);
             post_display_mode(post_id);
             update_trending();
         },
-        error: function(error) {
+        error: function (error) {
             console.log(error);
-        }
+        },
     });
-    
 }

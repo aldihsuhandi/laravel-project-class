@@ -7,10 +7,14 @@
     @endif
     w-full my-2">
         <div id = "post_view_{{ $post -> id }}">
-            <a class = "w-full flex flex-row justify-between items-end" href = "/post/view/{{ $post -> id }}">
-                <div class = "font-semibold text-xl text-fg" id = "post_title_{{ $post -> id }}">{{ $post -> title }}</div>
-                <div class = "font-base text-md text-fg" id = "post_category_{{ $post -> id }}">{{ $post -> category -> name }}</div>
-            </a>
+            <div class = "flex flex-row w-full justify-between items-center">
+                <a class = "flex flex-row justify-start items-end" href = "/post/view/{{ $post -> id }}">
+                    <div class = "font-semibold text-xl text-fg" id = "post_title_{{ $post -> id }}">{{ $post -> title }}</div>
+                </a>
+                <a class = "flex flex-row justify-end items-end" href = "/search?category={{ $post -> category -> id }}" id = "post_category_{{ $post -> id }}">
+                    <div class = "font-base text-md text-fg" id = "post_category_text_{{ $post -> id }}">{{ $post -> category -> name }}</div>
+                </a>
+            </div>
             <a href = "/user/u/{{ $post -> user -> username }}" class = "flex flex-row justify-start items-center w-full">
                 <div class = "bg-fg rounded-full bg-cover bg-no-repeat bg-center" style = "height: 25px;width: 25px;background-image: url('{{ asset($post -> user -> profile_img) }}');"></div>
                 <div class = "

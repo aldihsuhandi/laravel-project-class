@@ -6,7 +6,7 @@
     )
         text-blueAlt
     @else
-        text-fg 
+        text-fg
     @endif
     cursor-pointer flex flex-row items-center justify-center pr-4 mx-1" id = "like_comment_{{ $comment-> id }}">
     <p class = "mt-2" id = "likecounter_comment_{{$comment -> id}}">{{ $comment -> like -> where('value', '1') -> count() }} </p>
@@ -20,7 +20,7 @@
     )
         text-blueAlt
     @else
-        text-fg 
+        text-fg
     @endif
     cursor-pointer flex flex-row items-center justify-center pr-4 mx-1" id = "dislike_comment_{{ $comment -> id }}">
     <p class = "mt-2" id = "dislikecounter_comment_{{$comment -> id}}">{{ $comment -> like -> where('value', '-1') -> count() }} </p>
@@ -36,10 +36,11 @@
     </div>
 
     <form action="/post/{{ $comment -> post -> id }}/comment/delete" method = "post">
+        @csrf
         <input type="hidden" name="comment_id" value = "{{ $comment -> id }}">
         <button class = "text-fg cursor-pointer flex flex-row items-center justify-center pr-4 mx-1 mt-2"">
             <i class = "fas fa-trash"></i>
         </a>
     </form>
-    
+
 @endif
