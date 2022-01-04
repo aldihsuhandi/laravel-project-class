@@ -25,7 +25,7 @@
 
     <div class = "flex flex-row justify-start items-center">
         @if (Auth::check())
-            <a href="/user/{{ Auth::user() -> username }}" class = "mx-3 p-2 rounded-md bg-bgAlt text-fg">Profile</a>
+            <a href="/user/u/{{ Auth::user() -> username }}" class = "mx-3 p-2 rounded-md bg-bgAlt text-fg">Profile</a>
             <a href = "/logout" class = "mx-3 p-2 rounded-md bg-bgAlt text-fg">Logout</a>
         @else
             <a href = "/login" class = "mx-3 p-2 rounded-md bg-bgAlt text-fg">Login</a>
