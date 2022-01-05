@@ -89,7 +89,9 @@ class PostController extends Controller
             if ($p_value == 0) {
                 $state = "null";
             }
-            LikePost::where('user_id', $user->id)->where('post_id', $post->id)->update(['value' => $p_value]);
+            LikePost::where('user_id', $user->id)
+                ->where('post_id', $post->id)
+                ->update(['value' => $p_value]);
         }
 
 
@@ -131,7 +133,7 @@ class PostController extends Controller
     public function update_post(Request $request)
     {
         if ($request->ajax() == false) {
-            return abort(404);
+            return abort(404); 
         }
 
         Post::where('id', $request->id)
