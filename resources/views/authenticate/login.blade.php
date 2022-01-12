@@ -15,7 +15,7 @@
         <div class = "flex flex-row justify-between items-center w-full">
             <form action="/login" enctype="multipart/form-data" method = "POST" class = "flex flex-col pt-5 mt-2 w-2/3 px-2">
                 @csrf
-                <label for="email" class = "text-fg block mb-2 text-md">Email or Username</label>
+                <label for="email" class = "text-fg block mb-2 text-md">Email</label>
                 <input type="text" class = "bg-bgAlt py-2 px-3 block text-fgAlt shadow appearance-none rounded w-full leading-tight focus:outline-none focus:shadow-outline" id = "email" name = "email">
                 <label for="email" class = "pt-3 text-fg block mb-2 text-md">Password</label>
                 <input type="password" class = "bg-bgAlt py-2 px-3 block text-fgAlt shadow appearance-none rounded w-full leading-tight focus:outline-none focus:shadow-outline" id = "password" name = "password">
